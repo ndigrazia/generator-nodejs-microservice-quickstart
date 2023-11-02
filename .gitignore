@@ -21,7 +21,6 @@ logs/
 *.iml
 
 # Dependency lock files
-package-lock.json
 yarn.lock
 
 # Environment variables
