@@ -1,0 +1,27 @@
+{
+  "name": "generator-nodejs-microservice-quickstart",
+  "version": "0.1.0",
+  "description": "A Yeoman generator to generate Nodejs microservices following architectural guidelines and best practices.",
+  "type": "module",
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "nodejs",
+    "microservice"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "npx eslint ."
+  },
+  "author": {
+    "name": "nobody",
+    "email": "nobody@gmail.com"
+  },
+  "dependencies": {
+    "mkdirp": "^3.0.1",
+    "yeoman-generator": "^6.0.1",
+    "yosay": "^2.0.2"    
+  }
+}

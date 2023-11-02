@@ -1,0 +1,32 @@
+# Node.js
+node_modules/
+
+coverage/
+
+docs/
+
+# Build output
+dist/
+build/
+
+# Logs
+logs/
+*.log
+
+# IDE specific files
+.vscode/
+.idea/
+*.iml
+
+# Dependency lock files
+package-lock.json
+yarn.lock
+
+# Environment variables
+.env
+
+# Compiled output
+*.min.js
+
+# yo config file
+.yo-rc.json

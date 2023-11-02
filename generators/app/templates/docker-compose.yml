@@ -1,0 +1,8 @@
+version: '3'
+services:
+  my-service:
+    image: <%= name %>
+    ports:
+      - "<%= hostPort %>:<%= port %>"
+    volumes:
+      - ./.env:/usr/src/app/.env:ro

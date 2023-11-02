@@ -1,0 +1,71 @@
+{
+    "name": "<%= name %>",
+    "version": "<%= version %>",
+    "description": "<%= description %>",
+    "author": "<%= author %>",
+    "scripts": {
+        "test": "jest", 
+        "lint": "npx eslint .", 
+        "dev": "nodemon -i \"*.test.js\" .", 
+        "docs": "apidoc -i . -o docs", 
+        "coverage": "npm test -- --coverage", 
+        "start": "node --trace-warnings .", 
+         <%_ if (buildingContainerImages && buildingContainerImages === 'docker') { _%>
+        "cont-build": "docker build -t $npm_package_name .", 
+        "cont-run": "docker-compose up -d", 
+        "cont-stop": "docker-compose down", 
+        "cont-rm-image": "docker images -a | grep $npm_package_name | awk '{print $3}' | xargs docker rmi ", 
+        "cont-logs": "docker logs -f $(docker ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
+        "find-sec-vulns": "snyk auth && snyk container test $npm_package_name --file=Dockerfile"
+        <%_ } _%>
+        <%_ if (buildingContainerImages && buildingContainerImages === 'buildah') { _%>
+        "cont-build": "buildah build -t $npm_package_name -f Dockerfile .",
+        "cont-run": "podman run -d -v ./.env:/usr/src/app/.env:ro -p <%= hostPort %>:<%= port %> $npm_package_name",
+        "cont-logs": "podman logs -f $(podman ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
+        "cont-stop": "podman stop $(podman ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
+        "cont-rm-image": "podman images -a | grep $npm_package_name | awk '{print $3}' | xargs podman rmi -f ",
+        "cont-clean-all-images": "podman system prune --all --force && podman rmi --all",
+        "cont-tag": "podman tag $npm_package_name docker.io/<%= userDockerHub %>/$npm_package_name",
+        "cont-push": "podman login -u <%= userDockerHub %> docker.io && podman push docker.io/<%= userDockerHub %>/$npm_package_name",
+        "find-sec-vulns": "snyk auth && snyk container test docker.io/<%= userDockerHub %>/$npm_package_name"
+        <%_ } _%>
+    },
+    "apidoc": {
+        "name": "$npm_package_name",
+        "version": "$npm_package_version",
+        "description": "$npm_package_description",
+        "title": "npm_package_name api documentation"
+    },
+    "jest": {
+        "testEnvironment": "node",
+        "setupFilesAfterEnv": [
+            "<rootDir>/test/setup.js"
+        ]
+    },
+    "dependencies": {
+        "body-parser": "^1.20.0",
+        "bodymen": "^1.1.1",
+        "dotenv": "^16.3.1",
+        "express": "^4.18.1",
+        "morgan": "^1.10.0",
+        "querymen": "^2.1.4",
+        "uuid": "^9.0.1",
+        "winston": "^3.11.0"
+    },
+    "keywords": [
+        "node",
+        "microservice",
+        "standard",
+        "backend"
+    ],
+    "devDependencies": {
+        "eslint": "^8.52.0",
+        "eslint-config-standard": "^17.1.0",
+        "eslint-plugin-import": "^2.29.0",
+        "eslint-plugin-n": "^16.2.0",
+        "eslint-plugin-promise": "^6.1.1",
+        "jest": "^29.7.0",
+        "nodemon": "^3.0.1",
+        "supertest": "^6.3.3"
+    }
+}

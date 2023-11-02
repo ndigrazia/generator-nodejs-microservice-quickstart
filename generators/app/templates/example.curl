@@ -1,0 +1,61 @@
+# POST /users 201
+curl -X POST -H "Content-Type: application/json" -d '{
+  "firstName": "John Michael",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "address": {
+    "street": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "United States"
+  },
+  "delivery": {
+    "street": "123 Main St",
+    "city": "New York",
+    "state": "NY",
+    "zipCode": "10001",
+    "country": "United States"
+  },
+  "role": "Employee"
+}' http://localhost:<%= hostPort %>/users
+
+# PUT /users/:id 200
+curl -X PUT -H "Content-Type: application/json" -d '{
+  "email": "updated-email@d.com",
+  "address": {
+    "street": "456 Elm St",
+    "city": "Los Angeles",
+    "state": "CA",
+    "zipCode": "90001",
+    "country": "United States"
+  },
+  "role": "Support"
+}' http://localhost:<%= hostPort %>/users/{userId}
+
+# GET /users 200
+curl -X GET http://localhost:<%= hostPort %>/users
+
+# GET /users?firstName=Michael 200
+curl -X GET http://localhost:<%= hostPort %>/users?firstName=Michael
+
+# GET /users?firstName=Alice 200
+curl -X GET http://localhost:<%= hostPort %>/users?firstName=Alice
+
+# DELETE /users/:id 204
+curl -X DELETE http://localhost:<%= hostPort %>/users/{userId}
+
+# GET /users/:id/orders 200
+curl -X GET http://localhost:<%= hostPort %>/users/{userId}/orders
+
+# GET /health/memory-usage 200
+curl -X GET http://localhost:<%= hostPort %>/health/memory-usage
+
+# GET /health/live 200
+curl -X GET http://localhost:<%= hostPort %>/health/live
+
+# GET /health/ready 200
+curl -X GET http://localhost:<%= hostPort %>/health/ready
+
+
+
