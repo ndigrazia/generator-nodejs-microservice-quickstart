@@ -5,6 +5,8 @@ coverage/
 
 docs/
 
+src/
+
 # Build output
 dist/
 build/

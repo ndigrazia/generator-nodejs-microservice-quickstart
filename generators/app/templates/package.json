@@ -11,23 +11,23 @@
         "coverage": "npm test -- --coverage", 
         "start": "node --trace-warnings .", 
          <%_ if (buildingContainerImages && buildingContainerImages === 'docker') { _%>
-        "cont-build": "docker build -t $npm_package_name .", 
+        "cont-build": "docker build -t $npm_package_name:$npm_package_version .", 
         "cont-run": "docker-compose up -d", 
         "cont-stop": "docker-compose down", 
-        "cont-rm-image": "docker images -a | grep $npm_package_name | awk '{print $3}' | xargs docker rmi ", 
-        "cont-logs": "docker logs -f $(docker ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
-        "find-sec-vulns": "snyk auth && snyk container test $npm_package_name --file=Dockerfile"
+        "cont-rm-image": "docker images -a | grep $npm_package_name | grep $npm_package_version | awk '{print $3}' | xargs docker rmi ", 
+        "cont-logs": "docker logs -f $(docker ps -f 'status=running' | grep $npm_package_name | grep $npm_package_version | awk '{print $1}')",
+        "find-sec-vulns": "snyk auth && snyk container test $npm_package_name:$npm_package_version --file=Dockerfile"
         <%_ } _%>
         <%_ if (buildingContainerImages && buildingContainerImages === 'buildah') { _%>
-        "cont-build": "buildah build -t $npm_package_name -f Dockerfile .",
-        "cont-run": "podman run -d -v ./.env:/usr/src/app/.env:ro -p <%= hostPort %>:<%= port %> $npm_package_name",
-        "cont-logs": "podman logs -f $(podman ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
-        "cont-stop": "podman stop $(podman ps -f 'status=running' | grep $npm_package_name | awk '{print $1}')",
-        "cont-rm-image": "podman images -a | grep $npm_package_name | awk '{print $3}' | xargs podman rmi -f ",
+        "cont-build": "buildah build -t $npm_package_name:$npm_package_version -f Dockerfile .",
+        "cont-run": "podman run -d -v ./.env:/usr/src/app/.env:ro -p <%= hostPort %>:<%= port %> $npm_package_name:$npm_package_version",
+        "cont-logs": "podman logs -f $(podman ps -f 'status=running' | grep $npm_package_name | grep $npm_package_version | awk '{print $1}')",
+        "cont-stop": "podman stop $(podman ps -f 'status=running' | grep $npm_package_name | grep $npm_package_version | awk '{print $1}')",
+        "cont-rm-image": "podman images -a | grep $npm_package_name | grep $npm_package_version | awk '{print $3}' | xargs podman rmi -f ",
         "cont-clean-all-images": "podman system prune --all --force && podman rmi --all",
-        "cont-tag": "podman tag $npm_package_name docker.io/<%= userDockerHub %>/$npm_package_name",
-        "cont-push": "podman login -u <%= userDockerHub %> docker.io && podman push docker.io/<%= userDockerHub %>/$npm_package_name",
-        "find-sec-vulns": "snyk auth && snyk container test docker.io/<%= userDockerHub %>/$npm_package_name"
+        "cont-tag": "podman tag $npm_package_name:$npm_package_version docker.io/<%= userDockerHub %>/$npm_package_name:$npm_package_version",
+        "cont-push": "podman login -u <%= userDockerHub %> docker.io && podman push docker.io/<%= userDockerHub %>/$npm_package_name:$npm_package_version",
+        "find-sec-vulns": "snyk auth && snyk container test docker.io/<%= userDockerHub %>/$npm_package_name:$npm_package_version"
         <%_ } _%>
     },
     "apidoc": {

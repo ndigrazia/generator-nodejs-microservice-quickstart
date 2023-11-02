@@ -1,7 +1,7 @@
 version: '3'
 services:
   my-service:
-    image: <%= name %>
+    image: <%= name %>:<%= version %>
     ports:
       - "<%= hostPort %>:<%= port %>"
     volumes:
