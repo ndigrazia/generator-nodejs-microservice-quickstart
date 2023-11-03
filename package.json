@@ -19,6 +19,10 @@
     "name": "nobody",
     "email": "nobody@gmail.com"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndigrazia/generator-nodejs-microservice-quickstart.git"
+  },
   "dependencies": {
     "mkdirp": "^3.0.1",
     "yeoman-generator": "^6.0.1",
