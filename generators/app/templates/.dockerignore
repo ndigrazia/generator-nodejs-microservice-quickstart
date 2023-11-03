@@ -3,6 +3,7 @@ node_modules
 coverage
 docs
 test
+images
 
 **/*.test.js
 

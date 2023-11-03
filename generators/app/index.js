@@ -77,7 +77,7 @@ export default class AppGeneratorClass extends Generator {
         message: function (props) {
           return 'What is the default production image?'
         },
-        default: that.config.get('productionImage') || 'node:20.8.1-bookworm-slim'
+        default: that.config.get('productionImage') || 'node:20.5.1-bookworm-slim'
       },
       {
         type: 'list',

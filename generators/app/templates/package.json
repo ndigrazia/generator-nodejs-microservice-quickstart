@@ -9,7 +9,7 @@
         "dev": "nodemon -i \"*.test.js\" .", 
         "docs": "apidoc -i . -o docs", 
         "coverage": "npm test -- --coverage", 
-        "start": "node --trace-warnings .", 
+        "start": "node .", 
          <%_ if (buildingContainerImages && buildingContainerImages === 'docker') { _%>
         "cont-build": "docker build -t $npm_package_name:$npm_package_version .", 
         "cont-run": "docker-compose up -d", 
