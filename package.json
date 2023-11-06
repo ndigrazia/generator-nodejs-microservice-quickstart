@@ -1,5 +1,5 @@
 {
-  "name": "generator-nodejs-microservice-quickstart",
+  "name": "generator-nodejs-microservice-starter",
   "version": "0.1.0",
   "description": "A Yeoman generator to generate Nodejs microservices following architectural guidelines and best practices.",
   "type": "module",
@@ -21,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ndigrazia/generator-nodejs-microservice-quickstart.git"
+    "url": "https://github.com/ndigrazia/generator-nodejs-microservice-starter.git"
   },
   "dependencies": {
     "mkdirp": "^3.0.1",

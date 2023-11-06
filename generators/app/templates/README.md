@@ -15,6 +15,7 @@ This example emphasize the alignment of the microservice with architectural guid
     - [Docker](#docker)
     <%_ } _%>
     - [Apidoc \& Snyk (Required)](#apidoc--snyk-required)
+    - [Loading environment variables](#loading-environment-variables)
   - [Usage](#usage)
   - [Features](#features)
   - [Run locally](#run-locally)
@@ -156,6 +157,18 @@ Snyk is a tool for finding and fixing vulnerabilities in your project's dependen
 
 ```bash
 npm install -g snyk
+```
+
+### Loading environment variables
+
+To run this microservice you need to create a `.env` file in the root directory of your project. Add your environment variables in the format KEY=VALUE. For example:
+
+```
+NODE_ENV=development
+PORT=9000
+IP=0.0.0.0
+API_ROOT=/
+LOGGER_LEVEL=debug
 ```
 
 ## Usage
